@@ -1,0 +1,93 @@
+.cover > a{
+	color: black!important;
+}
+body{
+	z-index: 0!important;
+}
+.cover{
+	margin-left: 50px;
+	position: relative;
+	width: 100%;
+	height: auto;
+	z-index: 5;
+}
+.main{
+	display: flex;
+}
+.box-category-product{
+	margin-top: 30px;
+	margin-left: 220px;
+}
+.box-category-product > span{
+	color: #169ED4;
+	font-weight: bold;
+}
+.box-category-product > a {
+	color: black;
+}
+.box-category-product > a:hover{
+	color: black!important;
+}
+
+.shop-page-title{
+	margin-left: 220px;
+	height: 69px;
+	width: 1679px;
+	z-index: 99;
+	margin-top: 80px;
+	display: flex;
+}
+
+.shop-page-inner{
+	width: 655px;
+	display: flex;
+}
+
+.orderby{
+	display: flex;
+}
+
+.product-karofi{
+	display: flex;
+	flex-wrap: wrap;
+	margin-left: 50px;
+}
+
+.product-karofi-frame{
+	height: 1581px;
+	width: 1000px;
+}
+
+.orderby > p {
+	margin-top: 5px;
+	margin-right: 5px;
+	color: gray;
+}
+
+.shop-page-inner > a{
+	color: gray;
+	margin:1px 5px;
+}
+.shop-page-inner > a:hover{
+	color: gray!important;
+}
+
+.shop-page-inner > p{
+	margin-left: 5px;
+}
+
+#children > a{
+	color: black;
+	text-transform: none;
+	font-size: 13px;
+}
+#children-other > a{
+	color: black;
+	text-transform: none;
+	font-size: 13px;
+}
+#children-coldwarm > a{
+	color: black;
+	text-transform: none;
+	font-size: 13px;
+}
