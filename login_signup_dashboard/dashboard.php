@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Admin Dashboard</title> 
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="dashboard.css">
+        <style>
+            .admin_image{
+                width: 100px;
+                object-fit: contain;
+            }
+        </style>
+
+    </head>
+    <body>
+        <!-- navbar -->
+        <div class="container-fluid p-0">
+            <!--1-->
+            <nav class="navbar navbar-expand-lg navbar-light bg-info">
+                <div class="container-fluid">
+                    <img src="img/logo.png" alt="" class="logo">
+                    <nav class="navbar navbar-expand-lg">  
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a href="" class="nav-link">Welcome</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </nav>
+            <!--2-->
+            <div class="bg-light">
+                <h3 class="text-center p-2">Quản Lý</h3>
+            </div>
+            <!--3-->
+            <div class="row">
+                <div class="col-md-12 bg-secondary p-1 d-flex align-items-center">
+                    <div class="p-3">
+                        <a href="#"><img src="img/fish.jpg" alt="" class="admin_image"></a>
+                        <p class="text-light text-center">Admin Name</p>
+                    </div>
+                    <div class="button text-center">
+                        <button><a href="insert_product.php" class="btn_row">> Insect Products</a></button>
+                        <button><a href="" class="btn_row">View Products</a></button>
+                        <button><a href="dashboard.php?insert_category" class="btn_row">> Insert Categories</a></button>
+                        <button><a href="" class="btn_row">View Categories</a></button>
+                        <button><a href="dashboard.php?insert_brand" class="btn_row">> Insert Brands</a></button>
+                        <button><a href="" class="btn_row">View Brands</a></button>
+                        <button><a href="" class="btn_row">All Order</a></button>
+                        <button><a href="" class="btn_row">All Payments</a></button>
+                        <button><a href="" class="btn_row">List Users</a></button>
+                        <button><a href="" class="btn_row">Log Out</a></button>
+                    </div>
+                </div>
+            </div>
+            <!--4-->
+            <div class="container my-5">
+                <?php 
+                if(isset($_GET['insert_category'])){
+                    include('insert_categories.php');
+                }
+
+                if(isset($_GET['insert_brand'])){
+                    include('insert_brands.php');
+                }
+                ?>
+            </div>
+
+        </div>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    </body>
+</html>
