@@ -1,0 +1,9 @@
+.back-button {
+    background-color: #12A2D7;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none; /* loại bỏ gạch chân dưới */
+}

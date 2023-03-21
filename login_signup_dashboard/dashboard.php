@@ -1,3 +1,9 @@
+<?php   
+    session_start();
+    $username = $_SESSION['user_uname'];
+    include('C:\xampp\htdocs\444\includes\connect.php');
+    ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -26,7 +32,7 @@
                     <nav class="navbar navbar-expand-lg">  
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a href="" class="nav-link">Welcome</a>
+                                <a href="" class="nav-link">Welcome, <?php echo $username; ?>!</a>
                             </li>
                         </ul>
                     </nav>
@@ -41,19 +47,19 @@
                 <div class="col-md-12 bg-secondary p-1 d-flex align-items-center">
                     <div class="p-3">
                         <a href="#"><img src="img/fish.jpg" alt="" class="admin_image"></a>
-                        <p class="text-light text-center">Admin Name</p>
+                        <p class="text-light text-center"><?php echo $username; ?></p>
                     </div>
                     <div class="button text-center">
                         <button><a href="insert_product.php" class="btn_row">> Insect Products</a></button>
-                        <button><a href="" class="btn_row">View Products</a></button>
+                        <button><a href="viewproduct.php" class="btn_row">> View Products</a></button>
                         <button><a href="dashboard.php?insert_category" class="btn_row">> Insert Categories</a></button>
-                        <button><a href="" class="btn_row">View Categories</a></button>
-                        <button><a href="dashboard.php?insert_brand" class="btn_row">> Insert Brands</a></button>
-                        <button><a href="" class="btn_row">View Brands</a></button>
+                        <button><a href="view_cate.php" class="btn_row">> View Categories</a></button>
+                        <button><a href="dashboard.php?get_cate" class="btn_row">> Gắn Cate</a></button>
+                        <button><a href="dashboard.php?push_cate" class="btn_row">> Bỏ Cate</a></button>
                         <button><a href="" class="btn_row">All Order</a></button>
                         <button><a href="" class="btn_row">All Payments</a></button>
-                        <button><a href="" class="btn_row">List Users</a></button>
-                        <button><a href="" class="btn_row">Log Out</a></button>
+                        <button><a href="view_users.php" class="btn_row">> List Users</a></button>
+                        <button><a href="logout.php" class="btn_row">> Log Out</a></button>
                     </div>
                 </div>
             </div>
@@ -64,8 +70,12 @@
                     include('insert_categories.php');
                 }
 
-                if(isset($_GET['insert_brand'])){
-                    include('insert_brands.php');
+                if(isset($_GET['get_cate'])){
+                    include('get_cate.php');
+                }
+
+                if(isset($_GET['push_cate'])){
+                    include('push_cate.php');
                 }
                 ?>
             </div>
