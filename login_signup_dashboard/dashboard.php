@@ -13,7 +13,7 @@
         <title>Admin Dashboard</title> 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="dashboard.css">
+        <link rel="stylesheet" href="css/dashboard.css">
         <style>
             .admin_image{
                 width: 100px;
@@ -49,7 +49,7 @@
                         <a href="#"><img src="img/fish.jpg" alt="" class="admin_image"></a>
                         <p class="text-light text-center"><?php echo $username; ?></p>
                     </div>
-                    <div class="button text-center">
+                    <div class="text-center">
                         <button><a href="insert_product.php" class="btn_row">> Insect Products</a></button>
                         <button><a href="viewproduct.php" class="btn_row">> View Products</a></button>
                         <button><a href="dashboard.php?insert_category" class="btn_row">> Insert Categories</a></button>
