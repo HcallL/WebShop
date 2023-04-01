@@ -2,6 +2,19 @@
 	require_once('layouts/header.php');
 	include('C:\xampp\htdocs\444\includes\connect.php');
 
+	session_start();
+
+	$product_id = isset($_GET['product_id']) ? $_GET['product_id'] : null;
+	$product_title = isset($_GET['product_title']) ? $_GET['product_title'] : null;
+	$product_price = isset($_GET['product_price']) ? $_GET['product_price'] : null;
+
+	if ($product_id && $product_title && $product_price) {
+		// Lưu thông tin sản phẩm vào session
+		$_SESSION['cart'][$product_id] = array(
+			'title' => $product_title,
+			'price' => $product_price
+		);
+	}
 	// Tính số trang hiện tại
 	$current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
@@ -12,19 +25,26 @@
 	$start = ($current_page - 1) * $per_page;
 
 	// Truy vấn sản phẩm
-	$sql = "SELECT products.*, GROUP_CONCAT(categories.category_title SEPARATOR ', ') AS category_titles 
-	        FROM products 
-			LEFT JOIN product_categories ON products.product_id = product_categories.product_id 
-			LEFT JOIN categories ON product_categories.category_id = categories.category_id 
-			GROUP BY products.product_id 
-			LIMIT $start, $per_page";
-	$result = mysqli_query($con, $sql);
+	$sql = "SELECT products.*, GROUP_CONCAT(categories.category_title SEPARATOR ', ') AS category_titles
+			FROM products
+			LEFT JOIN product_categories ON products.product_id = product_categories.product_id
+			LEFT JOIN categories ON product_categories.category_id = categories.category_id
+			GROUP BY products.product_id";
 
-	$products = array();
+			if(isset($_GET['category'])) {
+				$category = $_GET['category'];
+				$sql .= " HAVING category_titles LIKE '%".$category."%'";
+			}
 
-  	while ($row = mysqli_fetch_assoc($result)) {
-    	$products[] = $row;
-	}
+			$sql .= " LIMIT $start, $per_page";
+
+			$result = mysqli_query($con, $sql);
+
+			$products = array();
+
+			while ($row = mysqli_fetch_assoc($result)) {
+				$products[] = $row;
+			}
 
 	// Truy vấn để tính tổng số trang
 	$sql = "SELECT COUNT(*) AS total_products FROM products";
@@ -35,8 +55,6 @@
 
 ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-<script src="sort_products.js"></script>
-
 
 <div class="cover">
 	<div class="shop-page-title">
@@ -57,7 +75,8 @@
 			</div>
 		</div>
 	</div>
-	
+
+	<!--Do thing right here right nowwwwwwwwwwwww -->
 
 <div class="main">
 	<div class="box-category-product">
@@ -67,8 +86,8 @@
 			<button onclick="myFunction()" style="border: none;background: none;margin-left: 70px;"><i class="fa-solid fa-angle-down"></i></button>
 			<ul id="children" style="display: none;">
 				<a href="">Máy lọc nước bán công nghiệp</a>
-				<a href="">Máy lọc nước để gầm</a>
-				<a href="">Máy lọc nước tủ đứng</a>
+				<a href="#" class="category-link" data-category="Máy lọc nước để gầm">Máy lọc nước để gầm</a>
+				<a href="#" class="category-link" data-category="Máy lọc nước tủ đứng">Máy lọc nước tủ đứng</a>
 			</ul>
 			<div class="underline"></div>
 
@@ -109,28 +128,28 @@
 			<span>LỌC THEO GIÁ</span>
 			<div class="diviser-small"></div>
 		</div>
+
 		<!-- HEREEEEEEE -->
 
 		<div class="product-karofi-frame">
 			<div class="product-karofi">
-
 				<?php foreach ($products as $product) { ?>
 				<div class="single-product">
+					<div class="category-titles" style="display:none;"><?php echo $product['category_titles']; ?></div>
 					<div class="thumbnail">
 						<img class="thumbnail-img" src="../product_images/<?php echo $product['product_image1']; ?>" class="card-img-top product-image">
 						<div class="quick-view">
-							<a href="">Xem nhanh</a>
+							<a href="cart.php?product_id=<?php echo $product_id; ?>&product_title=<?php echo $product_title; ?>&product_price=<?php echo $product_price; ?>">Mua</a>
 						</div>
 					</div>
 					<div class="box-title">
 						<a href=""><?php echo $product['product_title']; ?></a>
 						<div class="box-title-inner">
-							<span><?php echo number_format($product['product_price'], 0, ',', '.') . 'đ'; ?></span>
+						<span><?php echo number_format($product['product_price'], 0, ',', '.') . 'đ'; ?></span>
 						</div>
 					</div>
 				</div>
 				<?php } ?>
-
 			</div>
 		</div>
 	</div>
@@ -191,6 +210,26 @@
 	  }
 	}
 </script>
+
+<!-- Lọc Cate -->
+<script>
+  $(document).ready(function() {
+    $(".category-link").click(function(e) {
+      var category = $(this).data("category");
+      window.location.href = "?category=" + category;
+    });
+
+    var category = "<?php echo isset($_GET['category']) ? $_GET['category'] : ''; ?>";
+    if(category !== '') {
+      filterProducts(category);
+    }
+  });
+
+  function filterProducts(category) {
+    $(".category-titles:contains('" + category + "')").closest(".single-product").show();
+  }
+</script>
+
 
 <?php
 	require_once('layouts/footer.php');

@@ -21,7 +21,7 @@
 	<div class="header-main">
 		<div class="logo">
 		<a href="index.php">
-			<img style="height: auto; width: 278px;" src="img/logo.png">
+			<img style="height: auto; width: 278px;" src="">
 		</a>
 		</div>
 		<div class="search">

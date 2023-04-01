@@ -3,11 +3,20 @@
 	require_once('layouts/header.php');
 	include('C:\xampp\htdocs\444\includes\connect.php');
 
-	// Lấy thông tin sản phẩm từ cơ sở dữ liệu
-	$sql = "SELECT products.*, GROUP_CONCAT(categories.category_title SEPARATOR ', ') AS category_titles FROM products 
+	// Lấy danh sách ID sản phẩm được chọn
+	$selectedProducts = $_POST['product-select'];
+
+	// Chuyển đổi danh sách ID sang chuỗi để sử dụng trong câu lệnh SELECT
+	$productIds = implode(',', $selectedProducts);
+
+	// Truy vấn chỉ lấy thông tin của các sản phẩm đã chọn
+	$sql = "SELECT products.*, GROUP_CONCAT(categories.category_title SEPARATOR ', ') AS category_titles 
+			FROM products 
 			LEFT JOIN product_categories ON products.product_id = product_categories.product_id 
 			LEFT JOIN categories ON product_categories.category_id = categories.category_id 
-			GROUP BY products.product_id";
+			WHERE products.product_id IN ($productIds)
+			GROUP BY products.product_id 
+			LIMIT 12";
 	$result = mysqli_query($con, $sql);
 
 	$products = array();
@@ -246,233 +255,26 @@
 	</div>
 
 	<div class="product-top-sale">
-				<div class="single-product">
-					<div class="thumbnail">
-						<div class="discount">-19%</div>
-						<div class="img-preview">
-							<img src="img/kaq-u96-3-large.png">
-						</div>
-						<img src="img/U96-Karofi-Hai-Phong-thang-2-2023-copy-280x280.jpeg">
-						<div class="quick-view">
-							<a href="">Xem nhanh</a>
-						</div>
-					</div>
-					<div class="box-title">
-						<a href="">Máy lọc nước Karofi KAQ-U96</a>
-						<div class="box-title-inner">
-							<del>7.970.00 đ</del> <span>6.350.000 đ</span>
-						</div>
+		<?php foreach ($products as $product) { ?>
+			<div class="single-product">
+				<div class="thumbnail">
+				<img class="thumbnail-img" src="../product_images/<?php echo $product['product_image1']; ?>" class="card-img-top product-image">
+					<div class="quick-view">
+						<a href="">Xem nhanh</a>
 					</div>
 				</div>
-
-				<div class="single-product">
-					<div class="thumbnail">
-						<div class="discount">-19%</div>
-						<div class="img-preview">
-							<img src="img/kaq-u96-3-large.png">
-						</div>
-						<img src="img/U96-Karofi-Hai-Phong-thang-2-2023-copy-280x280.jpeg">
-						<div class="quick-view">
-							<a href="">Xem nhanh</a>
-						</div>
-					</div>
-					<div class="box-title">
-						<a href="">Máy lọc nước Karofi KAQ-U96</a>
-						<div class="box-title-inner">
-							<del>7.970.00 đ</del> <span>6.350.000 đ</span>
-						</div>
+				<div class="box-title">
+					<a href=""><?php echo $product['product_title']; ?></a>
+					<div class="box-title-inner">
+						<span><?php echo $product['product_price']; ?></span>
 					</div>
 				</div>
+			</div>
+		<?php } ?>
+	</div>
 
-				<div class="single-product">
-					<div class="thumbnail">
-						<div class="discount">-19%</div>
-						<div class="img-preview">
-							<img src="img/kaq-u96-3-large.png">
-						</div>
-						<img src="img/U96-Karofi-Hai-Phong-thang-2-2023-copy-280x280.jpeg">
-						<div class="quick-view">
-							<a href="">Xem nhanh</a>
-						</div>
-					</div>
-					<div class="box-title">
-						<a href="">Máy lọc nước Karofi KAQ-U96</a>
-						<div class="box-title-inner">
-							<del>7.970.00 đ</del> <span>6.350.000 đ</span>
-						</div>
-					</div>
-				</div>
-
-				<div class="single-product">
-					<div class="thumbnail">
-						<div class="discount">-19%</div>
-						<div class="img-preview">
-							<img src="img/kaq-u96-3-large.png">
-						</div>
-						<img src="img/U96-Karofi-Hai-Phong-thang-2-2023-copy-280x280.jpeg">
-						<div class="quick-view">
-							<a href="">Xem nhanh</a>
-						</div>
-					</div>
-					<div class="box-title">
-						<a href="">Máy lọc nước Karofi KAQ-U96</a>
-						<div class="box-title-inner">
-							<del>7.970.00 đ</del> <span>6.350.000 đ</span>
-						</div>
-					</div>
-				</div>
-
-				<div class="single-product">
-					<div class="thumbnail">
-						<div class="discount">-19%</div>
-						<div class="img-preview">
-							<img src="img/kaq-u96-3-large.png">
-						</div>
-						<img src="img/U96-Karofi-Hai-Phong-thang-2-2023-copy-280x280.jpeg">
-						<div class="quick-view">
-							<a href="">Xem nhanh</a>
-						</div>
-					</div>
-					<div class="box-title">
-						<a href="">Máy lọc nước Karofi KAQ-U96</a>
-						<div class="box-title-inner">
-							<del>7.970.00 đ</del> <span>6.350.000 đ</span>
-						</div>
-					</div>
-				</div>
-
-				<div class="single-product">
-					<div class="thumbnail">
-						<div class="discount">-19%</div>
-						<div class="img-preview">
-							<img src="img/kaq-u96-3-large.png">
-						</div>
-						<img src="img/U96-Karofi-Hai-Phong-thang-2-2023-copy-280x280.jpeg">
-						<div class="quick-view">
-							<a href="">Xem nhanh</a>
-						</div>
-					</div>
-					<div class="box-title">
-						<a href="">Máy lọc nước Karofi KAQ-U96</a>
-						<div class="box-title-inner">
-							<del>7.970.00 đ</del> <span>6.350.000 đ</span>
-						</div>
-					</div>
-				</div>
-
-				<div class="single-product">
-					<div class="thumbnail">
-						<div class="discount">-19%</div>
-						<div class="img-preview">
-							<img src="img/kaq-u96-3-large.png">
-						</div>
-						<img src="img/U96-Karofi-Hai-Phong-thang-2-2023-copy-280x280.jpeg">
-						<div class="quick-view">
-							<a href="">Xem nhanh</a>
-						</div>
-					</div>
-					<div class="box-title">
-						<a href="">Máy lọc nước Karofi KAQ-U96</a>
-						<div class="box-title-inner">
-							<del>7.970.00 đ</del> <span>6.350.000 đ</span>
-						</div>
-					</div>
-				</div>
-
-				<div class="single-product">
-					<div class="thumbnail">
-						<div class="discount">-19%</div>
-						<div class="img-preview">
-							<img src="img/kaq-u96-3-large.png">
-						</div>
-						<img src="img/U96-Karofi-Hai-Phong-thang-2-2023-copy-280x280.jpeg">
-						<div class="quick-view">
-							<a href="">Xem nhanh</a>
-						</div>
-					</div>
-					<div class="box-title">
-						<a href="">Máy lọc nước Karofi KAQ-U96</a>
-						<div class="box-title-inner">
-							<del>7.970.00 đ</del> <span>6.350.000 đ</span>
-						</div>
-					</div>
-				</div>
-
-				<div class="single-product">
-					<div class="thumbnail">
-						<div class="discount">-19%</div>
-						<div class="img-preview">
-							<img src="img/kaq-u96-3-large.png">
-						</div>
-						<img src="img/U96-Karofi-Hai-Phong-thang-2-2023-copy-280x280.jpeg">
-						<div class="quick-view">
-							<a href="">Xem nhanh</a>
-						</div>
-					</div>
-					<div class="box-title">
-						<a href="">Máy lọc nước Karofi KAQ-U96</a>
-						<div class="box-title-inner">
-							<del>7.970.00 đ</del> <span>6.350.000 đ</span>
-						</div>
-					</div>
-				</div>
-
-				<div class="single-product">
-					<div class="thumbnail">
-						<div class="discount">-19%</div>
-						<div class="img-preview">
-							<img src="img/kaq-u96-3-large.png">
-						</div>
-						<img src="img/U96-Karofi-Hai-Phong-thang-2-2023-copy-280x280.jpeg">
-						<div class="quick-view">
-							<a href="">Xem nhanh</a>
-						</div>
-					</div>
-					<div class="box-title">
-						<a href="">Máy lọc nước Karofi KAQ-U96</a>
-						<div class="box-title-inner">
-							<del>7.970.00 đ</del> <span>6.350.000 đ</span>
-						</div>
-					</div>
-				</div>
-
-				<div class="single-product">
-					<div class="thumbnail">
-						<div class="discount">-19%</div>
-						<div class="img-preview">
-							<img src="img/kaq-u96-3-large.png">
-						</div>
-						<img src="img/U96-Karofi-Hai-Phong-thang-2-2023-copy-280x280.jpeg">
-						<div class="quick-view">
-							<a href="">Xem nhanh</a>
-						</div>
-					</div>
-					<div class="box-title">
-						<a href="">Máy lọc nước Karofi KAQ-U96</a>
-						<div class="box-title-inner">
-							<del>7.970.00 đ</del> <span>6.350.000 đ</span>
-						</div>
-					</div>
-				</div>
-
-				<div class="single-product">
-					<div class="thumbnail">
-						<div class="discount">-19%</div>
-						<div class="img-preview">
-							<img src="img/kaq-u96-3-large.png">
-						</div>
-						<img src="img/U96-Karofi-Hai-Phong-thang-2-2023-copy-280x280.jpeg">
-						<div class="quick-view">
-							<a href="">Xem nhanh</a>
-						</div>
-					</div>
-					<div class="box-title">
-						<a href="">Máy lọc nước Karofi KAQ-U96</a>
-						<div class="box-title-inner">
-							<del>7.970.00 đ</del> <span>6.350.000 đ</span>
-						</div>
-					</div>
-				</div>								
+				
+							
 	</div>
 </div>
 <!----------------------Kết thúc phần sản phẩm bán chạy----------------------->
@@ -490,118 +292,65 @@
 
 	<div class="product-top-sale">
 		<div class="single-product">
-					<div class="thumbnail">
-						<div class="discount">-19%</div>
-						<div class="img-preview">
-							<img src="img/kaq-u96-3-large.png">
-						</div>
-						<img src="img/U96-Karofi-Hai-Phong-thang-2-2023-copy-280x280.jpeg">
-						<div class="quick-view">
-							<a href="">Xem nhanh</a>
-						</div>
-					</div>
-					<div class="box-title">
-						<a href="">Máy lọc nước Karofi KAQ-U96</a>
-						<div class="box-title-inner">
-							<del>7.970.00 đ</del> <span>6.350.000 đ</span>
-						</div>
-					</div>
+			<div class="thumbnail">
+				<img src="img/U96-Karofi-Hai-Phong-thang-2-2023-copy-280x280.jpeg">
+				<div class="quick-view">
+					<a href="">Xem nhanh</a>
 				</div>
+			</div>
+			<div class="box-title">
+				<a href="">Máy lọc nước Karofi KAQ-U96</a>
+				<div class="box-title-inner">
+					<span>6.350.000 đ</span>
+				</div>
+			</div>
+		</div>
 
-				<div class="single-product">
-					<div class="thumbnail">
-						<div class="discount">-19%</div>
-						<div class="img-preview">
-							<img src="img/kaq-u96-3-large.png">
-						</div>
-						<img src="img/U96-Karofi-Hai-Phong-thang-2-2023-copy-280x280.jpeg">
-						<div class="quick-view">
-							<a href="">Xem nhanh</a>
-						</div>
-					</div>
-					<div class="box-title">
-						<a href="">Máy lọc nước Karofi KAQ-U96</a>
-						<div class="box-title-inner">
-							<del>7.970.00 đ</del> <span>6.350.000 đ</span>
-						</div>
-					</div>
+		<div class="single-product">
+			<div class="thumbnail">
+				<img src="img/U96-Karofi-Hai-Phong-thang-2-2023-copy-280x280.jpeg">
+				<div class="quick-view">
+					<a href="">Xem nhanh</a>
 				</div>
+			</div>
+			<div class="box-title">
+				<a href="">Máy lọc nước Karofi KAQ-U96</a>
+				<div class="box-title-inner">
+					<span>6.350.000 đ</span>
+				</div>
+			</div>
+		</div>
 
-				<div class="single-product">
-					<div class="thumbnail">
-						<div class="discount">-19%</div>
-						<div class="img-preview">
-							<img src="img/kaq-u96-3-large.png">
-						</div>
-						<img src="img/U96-Karofi-Hai-Phong-thang-2-2023-copy-280x280.jpeg">
-						<div class="quick-view">
-							<a href="">Xem nhanh</a>
-						</div>
-					</div>
-					<div class="box-title">
-						<a href="">Máy lọc nước Karofi KAQ-U96</a>
-						<div class="box-title-inner">
-							<del>7.970.00 đ</del> <span>6.350.000 đ</span>
-						</div>
-					</div>
+		<div class="single-product">
+			<div class="thumbnail">
+				<img src="img/U96-Karofi-Hai-Phong-thang-2-2023-copy-280x280.jpeg">
+				<div class="quick-view">
+					<a href="">Xem nhanh</a>
 				</div>
+			</div>
+			<div class="box-title">
+				<a href="">Máy lọc nước Karofi KAQ-U96</a>
+				<div class="box-title-inner">
+					<span>6.350.000 đ</span>
+				</div>
+			</div>
+		</div>
 
-				<div class="single-product">
-					<div class="thumbnail">
-						<div class="discount">-19%</div>
-						<div class="img-preview">
-							<img src="img/kaq-u96-3-large.png">
-						</div>
-						<img src="img/U96-Karofi-Hai-Phong-thang-2-2023-copy-280x280.jpeg">
-						<div class="quick-view">
-							<a href="">Xem nhanh</a>
-						</div>
-					</div>
-					<div class="box-title">
-						<a href="">Máy lọc nước Karofi KAQ-U96</a>
-						<div class="box-title-inner">
-							<del>7.970.00 đ</del> <span>6.350.000 đ</span>
-						</div>
-					</div>
+		<div class="single-product">
+			<div class="thumbnail">
+				<img src="img/U96-Karofi-Hai-Phong-thang-2-2023-copy-280x280.jpeg">
+				<div class="quick-view">
+					<a href="">Xem nhanh</a>
 				</div>
+			</div>
+			<div class="box-title">
+				<a href="">Máy lọc nước Karofi KAQ-U96</a>
+				<div class="box-title-inner">
+					<span>6.350.000 đ</span>
+				</div>
+			</div>
+		</div>
 
-				<div class="single-product">
-					<div class="thumbnail">
-						<div class="discount">-19%</div>
-						<div class="img-preview">
-							<img src="img/kaq-u96-3-large.png">
-						</div>
-						<img src="img/U96-Karofi-Hai-Phong-thang-2-2023-copy-280x280.jpeg">
-						<div class="quick-view">
-							<a href="">Xem nhanh</a>
-						</div>
-					</div>
-					<div class="box-title">
-						<a href="">Máy lọc nước Karofi KAQ-U96</a>
-						<div class="box-title-inner">
-							<del>7.970.00 đ</del> <span>6.350.000 đ</span>
-						</div>
-					</div>
-				</div>
-
-				<div class="single-product">
-					<div class="thumbnail">
-						<div class="discount">-19%</div>
-						<div class="img-preview">
-							<img src="img/kaq-u96-3-large.png">
-						</div>
-						<img src="img/U96-Karofi-Hai-Phong-thang-2-2023-copy-280x280.jpeg">
-						<div class="quick-view">
-							<a href="">Xem nhanh</a>
-						</div>
-					</div>
-					<div class="box-title">
-						<a href="">Máy lọc nước Karofi KAQ-U96</a>
-						<div class="box-title-inner">
-							<del>7.970.00 đ</del> <span>6.350.000 đ</span>
-						</div>
-					</div>
-				</div>
 	</div>
 </div>
 
