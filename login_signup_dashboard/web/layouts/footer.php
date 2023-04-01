@@ -1,4 +1,4 @@
-<footer>
+<footer class="mt-3 pb-2">
 	<div style="display: flex;">
 			<div style="margin-left: 270px;" class="box-widget">
 			<span style="text-transform: uppercase; color: #007BA9;">Karofi Hải Phòng</span>

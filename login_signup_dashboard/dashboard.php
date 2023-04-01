@@ -60,6 +60,7 @@
                         <button><a href="" class="btn_row">All Payments</a></button>
                         <button><a href="view_users.php" class="btn_row">> List Users</a></button>
                         <button><a href="logout.php" class="btn_row">> Log Out</a></button>
+                        <button><a href="index_help.php" class="btn_row">> Index Product</a></button>
                     </div>
                 </div>
             </div>

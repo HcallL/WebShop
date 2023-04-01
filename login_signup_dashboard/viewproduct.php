@@ -47,8 +47,8 @@
                             <td><?php echo $row['product_title']; ?></td>
                             <td><?php echo $row['category_titles']; ?>
                                 <div class="category-buttons">
-                                    <button class="btn btn-success add-category" data-id="<?php echo $row['product_id']; ?>">+</button>
-                                    <button class="btn btn-danger remove-category" data-id="<?php echo $row['product_id']; ?>">-</button>
+                            <!--    <button class="btn btn-success add-category" data-id="<?php echo $row['product_id']; ?>">+</button>
+                                    <button class="btn btn-danger remove-category" data-id="<?php echo $row['product_id']; ?>">-</button> -->
                                 </div>
                             </td>
                             <td><img src="product_images/<?php echo $row['product_image1']; ?>" alt="Product Image" class="img-thumbnail" width="200" height="150"></td>
