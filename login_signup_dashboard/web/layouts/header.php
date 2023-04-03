@@ -36,7 +36,7 @@
 			<a href="" style="color: white;"><i class="fa-solid fa-user"></i></a>
 		</div>
 		<div class="cart">
-			<a href="cart.php" style="color: white;"><i class="fa-regular fa-cart-shopping"></i></a>
+			<a href="cart_demo.php" style="color: white;"><i class="fa-regular fa-cart-shopping"></i></a>
 		</div>
 	</div>
 	<div class="menubar">

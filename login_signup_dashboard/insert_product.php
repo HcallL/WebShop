@@ -96,18 +96,7 @@
                 </select>
             </div>
 -->
-            <!--Brands
-            <div class="form-outline mb-4 w-50 m-auto">
-                <select name="product_brands" id="" class="form-select">
-                    <option value="">Select a Brands</option>
-                    <option value="">Karofi</option>
-                    <option value="">Karofi Livotec</option>
-                    <option value="">Korihome</option>
-                    <option value="">Kangaroo</option>
-                    <option value="">Đây Là Ví Dụ</option>
-                </select>
-            </div>
---> 
+
              <!-- Image 1 -->
             <div class="form-outline mb-4 w-50 m-auto"> 
             <label for="product_image1" class="form-label">Product image 1</label>
