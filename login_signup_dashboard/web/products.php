@@ -15,6 +15,7 @@
 			'price' => $product_price
 		);
 	}
+
 	// Tính số trang hiện tại
 	$current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
@@ -139,7 +140,8 @@
 					<div class="thumbnail">
 						<img class="thumbnail-img" src="../product_images/<?php echo $product['product_image1']; ?>" class="card-img-top product-image">
 						<div class="quick-view">
-							<a href="cart.php?product_id=<?php echo $product_id; ?>&product_title=<?php echo $product_title; ?>&product_price=<?php echo $product_price; ?>">Mua</a>
+							<!-- <a href="demo_cart.php?product_id=<?php echo $product['product_id']; ?>&product_title=<?php echo $product['product_title']; ?>&product_price=<?php echo $product['product_price']; ?>">Mua</a> -->
+							<button class="add-to-cart-btn" data-product-id="<?php echo $product['product_id']; ?>" data-product-title="<?php echo $product['product_title']; ?>" data-product-price="<?php echo $product['product_price']; ?>">Mua</button>
 						</div>
 					</div>
 					<div class="box-title">
@@ -229,6 +231,33 @@
     $(".category-titles:contains('" + category + "')").closest(".single-product").show();
   }
 </script>
+
+	<!-- Thêm Vào Cart --> 
+	<script>
+		$(document).ready(function() {
+		$('.add-to-cart-btn').click(function(e) {
+			e.preventDefault();
+			var productId = $(this).data('product-id');
+			var productTitle = $(this).data('product-title');
+			var productPrice = $(this).data('product-price');
+			$.ajax({
+			url: 'add_to_cart.php',
+			method: 'POST',
+			data: {
+				productId: productId,
+				productTitle: productTitle,
+				productPrice: productPrice
+			},
+			success: function(data) {
+				alert('Đã thêm sản phẩm ' + productTitle + ' thành công');
+			},
+			error: function() {
+				alert('Có lỗi xảy ra, vui lòng thử lại sau');
+			}
+			});
+		});
+		});
+	</script>
 
 
 <?php

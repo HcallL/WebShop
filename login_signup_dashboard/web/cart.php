@@ -1,20 +1,27 @@
 <?php
-	require_once('layouts/header.php');
-	include('C:\xampp\htdocs\444\includes\connect.php');
+    require_once('layouts/header.php');
+    include('C:\xampp\htdocs\444\includes\connect.php');
+    session_start();
 
-	$product_id = $_GET['product_id'];
-	$product_title = $_GET['product_title'];
-	$product_price = $_GET['product_price'];
+    if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
+        $cart_items = $_SESSION['cart'];
 
-	$sql = "SELECT products.*, GROUP_CONCAT(categories.category_title SEPARATOR ', ') AS category_titles FROM products 
-	LEFT JOIN product_categories ON products.product_id = product_categories.product_id 
-	LEFT JOIN categories ON product_categories.category_id = categories.category_id 
-	GROUP BY products.product_id";
-	  
-	$result = mysqli_query($con, $sql);
+        // Hiển thị thông tin sản phẩm đã chọn
+        foreach ($cart_items as $product_id => $product) {
+            $product_title = $product['title'];
+            $product_price = $product['price'];
 
-	
+            // Hiển thị thông tin sản phẩm
+            echo "Product ID: $product_id<br>";
+            echo "Product Title: $product_title<br>";
+            echo "Product Price: $product_price<br><br>";
+        }
+    } else {
+        echo "Chưa có sản phẩm trong giỏ hàng!";
+    }
 ?>
+
+
 
 <link rel="stylesheet" type="text/css" href="css/cart.css">
 
@@ -45,13 +52,13 @@
 			</div>
 		</div>
 
-		<!-- Thêm dòng này cho mỗi sản phẩm trong giỏ hàng -->
+			<!-- Thêm dòng này cho mỗi sản phẩm trong giỏ hàng -->
 		<div class="row mt-3">
 			<div class="col-md-6">
-			<p>Tên sản phẩm</p>
+			<p><?php echo $product_title; ?></p>
 			</div>
 			<div class="col-md-2">
-			<p>Giá sản phẩm</p>
+			<p><?php echo $product_price; ?></p>
 			</div>
 			<div class="col-md-2">
 			<input type="number" value="1" class="form-control">
@@ -60,6 +67,7 @@
 			<p>Tạm tính sản phẩm</p>
 			</div>
 		</div>
+
 
 		<hr>
 

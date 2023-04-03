@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 28, 2023 at 07:05 PM
+-- Generation Time: Apr 03, 2023 at 06:21 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -51,7 +51,53 @@ INSERT INTO `categories` (`category_id`, `category_title`) VALUES
 (1, 'Lọc Nước Nóng Lạnh'),
 (2, 'Máy Lọc Nước Nóng Lạnh'),
 (3, 'Máy Lọc Nước Để Gầm'),
-(4, 'Máy Lọc Nước Tủ Đứng');
+(4, 'Máy Lọc Nước Tủ Đứng'),
+(5, 'Máy Lọc Nước Karofi'),
+(6, 'Máy Lọc Nước Bán Công Nghiệp');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer`
+--
+
+CREATE TABLE `customer` (
+  `customer_id` int(11) NOT NULL,
+  `customer_name` varchar(100) NOT NULL,
+  `customer_phone` varchar(100) NOT NULL,
+  `customer_add` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `detail_order`
+--
+
+CREATE TABLE `detail_order` (
+  `detail_order_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `price` float(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order`
+--
+
+CREATE TABLE `order` (
+  `order_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `order_date` datetime NOT NULL,
+  `total_amount` float(10,2) NOT NULL,
+  `notee` varchar(200) NOT NULL,
+  `order_status` varchar(50) NOT NULL,
+  `payment_method` varchar(100) NOT NULL,
+  `shipping_address` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -107,7 +153,15 @@ CREATE TABLE `product_categories` (
 
 INSERT INTO `product_categories` (`product_id`, `category_id`) VALUES
 (2, 1),
-(7, 1);
+(7, 1),
+(6, 5),
+(6, 3),
+(7, 5),
+(7, 4),
+(8, 5),
+(9, 5),
+(10, 5),
+(9, 4);
 
 -- --------------------------------------------------------
 
@@ -148,6 +202,24 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`category_id`);
 
 --
+-- Indexes for table `customer`
+--
+ALTER TABLE `customer`
+  ADD PRIMARY KEY (`customer_id`);
+
+--
+-- Indexes for table `detail_order`
+--
+ALTER TABLE `detail_order`
+  ADD PRIMARY KEY (`detail_order_id`);
+
+--
+-- Indexes for table `order`
+--
+ALTER TABLE `order`
+  ADD PRIMARY KEY (`order_id`);
+
+--
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
@@ -180,13 +252,31 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `customer`
+--
+ALTER TABLE `customer`
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `detail_order`
+--
+ALTER TABLE `detail_order`
+  MODIFY `detail_order_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `order`
+--
+ALTER TABLE `order`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `users`
